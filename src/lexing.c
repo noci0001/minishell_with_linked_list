@@ -29,10 +29,48 @@ int is_red(char *str)
 
 int check_quotation(char *str)
 {
-	printf("HERE2!\n");
 	if (check_quantity_of_quotation(str) == 0)
 		return (0);
+	if (check_for_letters(str) == 0)
+		return (0);
 	return (1);
+}
+
+int check_for_letters(char *str)
+{
+	int found_status;
+
+	found_status = 0;
+	while (*str)
+	{
+		if (*str != '\'' || *str != '\"')
+			found_status = 1;
+		str++;
+	}
+	printf("%d\n", found_status);
+	return (found_status);
+}
+
+char *remove_quotes(char *str)
+{
+	int i;
+	int j;
+	char *ret_str = malloc(sizeof(char *) * 100);
+	if (!ret_str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		while (str[i] && (str[i] == '\"' || str[i] == '\''))
+			i++;
+		// if (str[i] && ((str[i] != '\'') || (str[i] != '\"')))
+		// 	ret_str[j++] = str[i++];
+		while (str[i] && ((str[i] != '\'') || (str[i] != '\"')))
+			ret_str[j++] = str[i++];
+	}
+	ret_str[j] = '\0';
+	return (ret_str);
 }
 
 int check_quantity_of_quotation(char *str)
@@ -51,10 +89,7 @@ int check_quantity_of_quotation(char *str)
 		str++;
 	}
 	if ((scount % 2 != 0) || (dcount % 2 != 0))
-	{
-		printf("ODD\n");
 		return (0);
-	}
 	return (1);
 }
 
@@ -83,7 +118,7 @@ t_cmd *lexing(char *block, t_cmd *curr)
 	words = ft_split(block, ' ');
 	if (words[0])
 		curr->cmd = words[0];
-	if (words[1][0] == '-' && words[1][1] && words[1])
+	if (words[1] && words[1][0] == '-' && words[1][1])
 	{
 		curr->flag = words[1];
 		i = 2;
@@ -100,6 +135,7 @@ t_cmd *lexing(char *block, t_cmd *curr)
 		}
 		else
 		{
+			words[i] = remove_quotes(words[i]);
 			curr->args[j] = words[i];
 			printf("IS ARG ->%s\n", curr->args[j]);
 			j++;
