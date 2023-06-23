@@ -12,7 +12,7 @@
 
 #include "../headers/minishell.h"
 
-int	is_red(char *str)
+int is_red(char *str)
 {
 	if (*str == '<')
 		return (1);
@@ -27,17 +27,18 @@ int	is_red(char *str)
 	return (0);
 }
 
-int	check_quotation(char *str)
+int check_quotation(char *str)
 {
+	printf("HERE2!\n");
 	if (check_quantity_of_quotation(str) == 0)
 		return (0);
 	return (1);
 }
 
-int	check_quantity_of_quotation(char *str)
+int check_quantity_of_quotation(char *str)
 {
-	int	scount;
-	int	dcount;
+	int scount;
+	int dcount;
 
 	scount = 0;
 	dcount = 0;
@@ -57,7 +58,7 @@ int	check_quantity_of_quotation(char *str)
 	return (1);
 }
 
-int	check_redirection_arg(char *word, int redirection)
+int check_redirection_arg(char *word, int redirection)
 {
 	if (redirection == 1)
 		redirection_in(word);
@@ -67,18 +68,47 @@ int	check_redirection_arg(char *word, int redirection)
 		here_doc(word);
 	if (redirection == 4)
 		double_redirection(word);
+	return (0);
 }
 
-t_cmd	*lexing(char	*block, t_cmd *curr)
+void redirection_in(char *str)
 {
-	char	**words;
-	int		type_redirection;
-	int		i;
-	int		j;
+	(void)str;
+	printf("hello");
+	return;
+}
+
+void redirection_out(char *str)
+{
+	(void)str;
+	printf("hello");
+	return;
+}
+
+void here_doc(char *str)
+{
+	(void)str;
+	printf("hello");
+	return;
+}
+
+void double_redirection(char *str)
+{
+	(void)str;
+	printf("hello");
+	return;
+}
+
+t_cmd *lexing(char *block, t_cmd *curr)
+{
+	char **words = NULL;
+	int type_redirection;
+	int i;
+	int j;
 
 	i = 1;
 	j = 0;
-	words = ft_split(block, ' ');
+	// words = ft_split(block, ' ');
 	if (words[0])
 		curr->cmd = words[0];
 	if (words[1][0] == '-' && words[1][1] && words[1])
