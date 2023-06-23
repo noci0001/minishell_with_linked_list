@@ -17,7 +17,7 @@ RM		= rm -rf
 
 HEADER	= headers/minishell.h
 
-SRCS	= src/main.c src/lexing.c
+SRCS	= src/main.c src/lexing.c src/redirection.c
 
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)

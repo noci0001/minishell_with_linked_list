@@ -71,34 +71,6 @@ int check_redirection_arg(char *word, int redirection)
 	return (0);
 }
 
-void redirection_in(char *str)
-{
-	(void)str;
-	printf("hello");
-	return;
-}
-
-void redirection_out(char *str)
-{
-	(void)str;
-	printf("hello");
-	return;
-}
-
-void here_doc(char *str)
-{
-	(void)str;
-	printf("hello");
-	return;
-}
-
-void double_redirection(char *str)
-{
-	(void)str;
-	printf("hello");
-	return;
-}
-
 t_cmd *lexing(char *block, t_cmd *curr)
 {
 	char **words = NULL;
@@ -108,7 +80,7 @@ t_cmd *lexing(char *block, t_cmd *curr)
 
 	i = 1;
 	j = 0;
-	// words = ft_split(block, ' ');
+	words = ft_split(block, ' ');
 	if (words[0])
 		curr->cmd = words[0];
 	if (words[1][0] == '-' && words[1][1] && words[1])

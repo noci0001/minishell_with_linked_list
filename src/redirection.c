@@ -10,10 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	redirection_in(char *str)
+#include "../headers/minishell.h"
+
+void redirection_in(char *str)
 {
-	
+    (void)str;
+    printf("hello");
+    return;
 }
-void	redirection_out(char *str);
-void	here_doc(char *str);
-void	double_redirection(char *str);
+
+void redirection_out(char *str)
+{
+    (void)str;
+    printf("hello");
+    return;
+}
+
+void here_doc(char *str)
+{
+    (void)str;
+    printf("hello");
+    return;
+}
+
+void double_redirection(char *str)
+{
+    (void)str;
+    printf("hello");
+    return;
+}
