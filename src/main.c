@@ -59,8 +59,9 @@ void create_linked_list(char *input)
 
 void gate_function(char *input)
 {
-	check_quotation(input);
-	create_linked_list(input);
+	if (check_quotation(input) == 1)
+		create_linked_list(input);
+	return ;
 }
 
 // from input detectc delimiters and implement a linked list

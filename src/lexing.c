@@ -68,6 +68,9 @@ char *remove_quotes(char *str)
 		// 	ret_str[j++] = str[i++];
 		while (str[i] && ((str[i] != '\'') || (str[i] != '\"')))
 			ret_str[j++] = str[i++];
+		printf("->%c\n", str[i]);
+		if (str[i] && (str[i] == '\'' || str[i] == '\"'))
+			break;
 	}
 	ret_str[j] = '\0';
 	return (ret_str);
