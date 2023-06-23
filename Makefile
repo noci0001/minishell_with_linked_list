@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
+#    By: snocita <samuelnocita@gmail.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/22 18:01:53 by snocita          ###   ########.fr        #
+#    Updated: 2023/06/23 19:59:18 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ RM		= rm -rf
 
 HEADER	= headers/minishell.h
 
-SRCS	= src/main.c src/lexing.c src/redirection.c
+SRCS	= src/main.c src/lexing.c src/redirection.c src/quotes_check.c \
+	src/debug.c
 
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)

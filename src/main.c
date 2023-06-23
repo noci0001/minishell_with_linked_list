@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: snocita <samuelnocita@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/22 18:27:32 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/23 21:09:44 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,40 @@ t_cmd *malloc_node(void)
 
 void create_linked_list(char *input)
 {
-	char **ret;
+	char **program;
 	int i;
 	t_cmd *head;
 	t_cmd *curr;
 
 	i = 0;
-	ret = ft_split(input, '|');
+	printf("input is -> %s\n", input);
+	program = ft_split(input, '|');
+	printf("splitted input is -> %s\n", program[1]);
 	head = malloc_node();
 	curr = head;
-	while (ret[i])
+	while (program[i])
 	{
-		curr = lexing(ret[i], curr);
+		printf("ANALIZYING STRING -> %s\n", program[i]);
+		curr = lexing(program[i], curr);
 		curr->next = malloc_node();
 		curr = curr->next;
 		i++;
 	}
-	free_double_arr(ret);
+	curr = head;
+	while (curr->next != NULL)
+	{
+		printf("!!ADDED NODE: %s\n", curr->cmd);
+		curr = curr->next;
+	}
+	free_double_arr(program);
 }
 
 void gate_function(char *input)
 {
-	if (check_quotation(input) == 1)
-		create_linked_list(input);
-	return ;
+	if (check_quotation(input) != 1)
+		return;
+	create_linked_list(input);
+	return;
 }
 
 // from input detectc delimiters and implement a linked list
@@ -72,6 +82,7 @@ void gate_function(char *input)
 int main(void)
 {
 	char *input;
+	ft_debug();
 
 	input = readline("Minishelly$ ");
 	if (strlen(input) > 0)

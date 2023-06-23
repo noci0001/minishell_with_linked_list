@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: snocita <samuelnocita@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/22 19:05:27 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/23 21:26:16 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,8 @@ void here_doc(char *str);
 void double_redirection(char *str);
 int check_for_letters(char *str);
 char *remove_quotes(char *str);
+
+void ft_debug(void);
+void debug_write(char *str, int id);
 
 #endif
