@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <samuelnocita@gmail.com>           +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/23 21:45:05 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 20:14:22 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,47 +40,41 @@ int check_redirection_arg(char *word, int redirection)
 	return (0);
 }
 
-t_cmd *lexing(char *block, t_cmd *curr)
+t_cmd *lexing(char *segmented_input, t_cmd *curr)
 {
-	char **words_of_program;
-	int type_redirection;
-	int i;
-	int j;
+	char	**words_of_program;
+	char	*tmp;
+	int		type_redirection;
+	int		i;
+	int		j;
 
 	i = 1;
 	j = 0;
-	debug_write("START OF NODE\n", 1);
-	words_of_program = ft_split(block, ' ');
+	type_redirection = 0;
+	// debug_get_sectioned_input(segmented_input);
+	words_of_program = ft_split(segmented_input, ' ');
 	if (words_of_program[0])
 	{
 		curr->cmd = words_of_program[0];
-		printf("ADDED CMD: %s\n", curr->cmd);
+		// debug_write("CMD intercepted:", 0);
+		// debug_write(curr->cmd, 1);
 	}
 	if (words_of_program[1] && words_of_program[1][0] == '-' && words_of_program[1][1])
 	{
 		curr->flag = words_of_program[1];
-		printf("ADDED FLAG: %s\n", curr->flag);
+		// debug_write("FLAG intercepted:", 0);
+		// debug_write(curr->flag, 0);
 		i = 2;
 	}
 	while (words_of_program[i])
 	{
 		j = 0;
-
-		type_redirection = which_redirection(words_of_program[i]);
-		if (type_redirection != 0)
-		{
-			i++;
-			check_redirection_arg(words_of_program[i], type_redirection);
-		}
-		else
-		{
-			words_of_program[i] = remove_quotes(words_of_program[i]);
-			curr->args[j] = words_of_program[i];
-			printf("CURR ARGS->%s\n", curr->args[0]);
-			j++;
-		}
+		tmp = remove_quotes(words_of_program[i]);
+		curr->args[j] = ft_strdup(tmp);
+		free(tmp);
+		j++;
 		i++;
 	}
-	printf("END OF NODE\n");
+	free_double_arr(words_of_program);
 	return (curr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <samuelnocita@gmail.com>           +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/23 21:26:16 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 17:42:11 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,26 @@ typedef struct s_valid
 	char *tmp2;
 } t_valid;
 
-void create_linked_list(char *input);
-t_cmd *malloc_node(void);
-void free_double_arr(char **str);
-t_cmd *lexing(char *block, t_cmd *curr);
-int check_quantity_of_quotation(char *str);
-int check_quotation(char *str);
-int check_redirection_arg(char *word, int redirection);
-int is_red(char *str);
+t_cmd	*create_linked_list(char *input);
+t_cmd	*malloc_node(void);
+void	free_double_arr(char **str);
+t_cmd	*lexing(char *segmented_input, t_cmd *curr);
+int		check_quantity_of_quotation(char *str);
+int		check_quotation(char *str);
+int		check_redirection_arg(char *word, int redirection);
+int		is_red(char *str);
 void redirection_in(char *str);
 void redirection_out(char *str);
 void here_doc(char *str);
 void double_redirection(char *str);
 int check_for_letters(char *str);
 char *remove_quotes(char *str);
+void	free_linked_list(t_cmd *head);
 
 void ft_debug(void);
 void debug_write(char *str, int id);
+char *debug_get_time(void);
+void debug_get_full_input(char *str);
+void debug_get_sectioned_input(char *str);
 
 #endif

@@ -3,38 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <samuelnocita@gmail.com>           +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:55:47 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/23 21:46:51 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 16:43:28 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 #include <fcntl.h>
+#include <time.h>
 
 static int fd;
+#define HEADER "             ✨-----------🐚 🐚 🐚-------------------------✨\n             ✨ Start of MINISHELL      Debugging Session ✨\n             ✨---------- 🐚 🐚 🐚 ------------------------✨\n"
 
-void debug_write(char *str, int id)
+void	debug_write(char *str, int id)
 {
-    int i = 1;
-    if ((id == 1) && (ft_strlen(str) == 0))
-    {
-        write(fd, ft_itoa(i), 1);
-        i++;
-        write(fd, ") START NEW NODE", ft_strlen(") START NEW NODE"));
-    }
-    else
-        write(fd, str, ft_strlen(str));
+	int		i = 0;
+	char	ch;
+
+	if (ft_strlen(str) == 0)
+		return ;
+	if (id == 0)
+	{
+		while (str[i])
+		{
+			ch = str[i];
+			write(fd, &ch, 1);
+			i++;
+		}
+	}
+	if (id == 1)
+	{
+		while (str[i])
+		{
+			ch = str[i];
+			write(fd, &ch, 1);
+			i++;
+		}
+		write(fd, "\n", 1);
+	}
+	if (id == 2)
+	{
+		while (str[i])
+		{
+			ch = str[i];
+			write(fd, &ch, 1);
+			i++;
+		}
+		write(fd, "\n", 1);
+		close(fd);
+	}
+	return ;
 }
 
-void ft_debug(void)
+char *get_time(void)
 {
-    fd = open("src/debugging.txt", O_WRONLY);
-    if (fd == -1)
-    {
-        printf("FD BROKEN\n");
-        return;
-    }
-    return;
+	time_t currentTime;
+	char *timeString;
+
+	currentTime = time(NULL);
+	timeString = ctime(&currentTime);
+	return (timeString);
+}
+
+void create_header()
+{
+	debug_write("\n\n", 0);
+	debug_write(get_time(), 1);
+	debug_write(HEADER, 1);
+	debug_write("\n\n", 0);
+	return ;
+}
+
+void debug_get_full_input(char *str)
+{
+	debug_write("Intercepted input:", 1);
+	debug_write("\t\t", 0);
+	debug_write(str, 1);
+	debug_write("\n", 1);
+}
+
+void debug_get_sectioned_input(char *str)
+{
+	debug_write("Sectioned input:", 1);
+	debug_write("\t\t", 0);
+	debug_write(str, 1);
+}
+
+void	ft_debug(void)
+{
+	fd = open("src/debugging.txt", O_WRONLY);
+	if (fd == -1)
+	{
+		printf("FD BROKEN\n");
+		return ;
+	}
+	create_header();
+
+	return ;
 }
