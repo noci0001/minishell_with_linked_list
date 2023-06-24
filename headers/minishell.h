@@ -6,7 +6,7 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 15:31:24 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:56:15 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <curses.h>
+#include <fcntl.h>
 // tcsetattr, tcgetattr, tgetent,
 //	tgetflag, tgetnum, tgetstr, tgoto, tputs: termios.h
 typedef struct s_cmd t_cmd;

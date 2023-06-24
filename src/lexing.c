@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/22 19:05:56 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 16:31:48 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int is_red(char *str)
 {
-	if (*str == '<')
+	if (*str == '<' && !str[1])
 		return (1);
-	if (*str == '>')
+	if (*str == '>'  && !str[1])
 		return (2);
 	if (!str[1])
 		return (0);
