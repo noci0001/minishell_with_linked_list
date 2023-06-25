@@ -6,15 +6,15 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/22 18:27:32 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/25 14:37:14 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-void free_double_arr(char **str)
+void	free_double_arr(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -25,9 +25,9 @@ void free_double_arr(char **str)
 	free(str);
 }
 
-t_cmd *malloc_node(void)
+t_cmd	*malloc_node(void)
 {
-	t_cmd *head;
+	t_cmd	*head;
 
 	head = malloc(sizeof(t_cmd *));
 	if (!head)
@@ -36,12 +36,12 @@ t_cmd *malloc_node(void)
 	return (head);
 }
 
-void create_linked_list(char *input)
+void	create_linked_list(char *input)
 {
-	char **ret;
-	int i;
-	t_cmd *head;
-	t_cmd *curr;
+	char	**ret;
+	int		i;
+	t_cmd	*head;
+	t_cmd	*curr;
 
 	i = 0;
 	ret = ft_split(input, '|');
@@ -57,7 +57,7 @@ void create_linked_list(char *input)
 	free_double_arr(ret);
 }
 
-void gate_function(char *input)
+void	gate_function(char *input)
 {
 	if (check_quotation(input) == 1)
 		create_linked_list(input);
@@ -69,9 +69,9 @@ void gate_function(char *input)
 // delimeters -> '|', '>', '>>', '<', '<<'
 // echo hello world | wc -l > text.txt
 // "echo hello world wc -l > text.txt";
-int main(void)
+int	main(void)
 {
-	char *input;
+	char	*input;
 
 	input = readline("Minishelly$ ");
 	if (strlen(input) > 0)

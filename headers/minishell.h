@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/22 19:05:27 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/25 15:47:51 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct s_cmd
 	char *flag;
 	char **args;
 	int fd;
+	char **evnp
 	struct s_cmd *next;
 };
 
