@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 17:42:11 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 22:55:50 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ typedef struct s_valid
 	char *tmp2;
 } t_valid;
 
+//
+char	**allocate_args(char** words_of_program, int i);
+void	print_linked(t_cmd *head);
+
+//
 t_cmd	*create_linked_list(char *input);
 t_cmd	*malloc_node(void);
 void	free_double_arr(char **str);

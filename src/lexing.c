@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 20:14:22 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/25 14:20:46 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,38 +43,50 @@ int check_redirection_arg(char *word, int redirection)
 t_cmd *lexing(char *segmented_input, t_cmd *curr)
 {
 	char	**words_of_program;
-	char	*tmp;
 	int		type_redirection;
 	int		i;
 	int		j;
 
-	i = 1;
 	j = 0;
 	type_redirection = 0;
 	// debug_get_sectioned_input(segmented_input);
 	words_of_program = ft_split(segmented_input, ' ');
 	if (words_of_program[0])
 	{
-		curr->cmd = words_of_program[0];
+		curr->cmd = ft_strdup(words_of_program[0]);
 		// debug_write("CMD intercepted:", 0);
 		// debug_write(curr->cmd, 1);
 	}
+	i = 1;
 	if (words_of_program[1] && words_of_program[1][0] == '-' && words_of_program[1][1])
 	{
-		curr->flag = words_of_program[1];
+		curr->flag = ft_strdup(words_of_program[1]);
 		// debug_write("FLAG intercepted:", 0);
 		// debug_write(curr->flag, 0);
 		i = 2;
 	}
-	while (words_of_program[i])
+	j = 0;
+	if(words_of_program[i])
 	{
-		j = 0;
-		tmp = remove_quotes(words_of_program[i]);
-		curr->args[j] = ft_strdup(tmp);
-		free(tmp);
-		j++;
-		i++;
+		curr->args = allocate_args(words_of_program, i);
+		while (words_of_program[i])
+			curr->args[j++] = remove_quotes(words_of_program[i++]);
+		curr->args[j] = 0;
+		printf("\n j: %d\n", j);
+
 	}
 	free_double_arr(words_of_program);
 	return (curr);
+}
+
+char	**allocate_args(char** words_of_program, int i)
+{
+	int j;
+	char **args;
+	j = i;
+	while (words_of_program[i])
+		i++;
+	args = malloc(sizeof(char *) * (i - j + 1));
+	printf("\n number: %d\n", (i - j + 1));
+	return (args);
 }

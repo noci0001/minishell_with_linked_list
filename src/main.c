@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 20:12:47 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 22:48:12 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,29 @@ void free_double_arr(char **str)
 	while (str[i])
 	{
 		free(str[i]);
+		str[i] = NULL;
 		i++;
 	}
 	free(str);
 	str = NULL;
 	return ;
+}
+
+void	free_linked_list(t_cmd *head)
+{
+	t_cmd	*tmp;
+
+	while (head != NULL)
+	{
+		tmp = head;
+		if (head->args)
+			free_double_arr(head->args);
+		free(head->cmd);
+		free(head->flag);
+		head = head->next;
+		free(tmp);
+		tmp = NULL;
+	}
 }
 
 t_cmd	*malloc_node(void)
@@ -36,10 +54,7 @@ t_cmd	*malloc_node(void)
 	head = malloc(sizeof(t_cmd));
 	if (!head)
 		return (NULL);
-	head->args = malloc(sizeof(char *) * 50);
-	if (!(head->args))
-		return (NULL);
-	
+	head->args = NULL;
 	head->flag = NULL;
 	head->cmd = NULL;
 	head->fd = 0;
@@ -55,15 +70,23 @@ t_cmd	*create_linked_list(char *input)
 	t_cmd	*curr;
 
 	i = 0;
+	head = NULL;
 	// debug_get_full_input(input);
 	program = ft_split(input, '|');
-	head = malloc_node();
-	curr = head;
 	while (program[i])
 	{
-		curr = lexing(program[i], curr);
-		curr->next = malloc_node();
-		curr = curr->next;
+		if (head == NULL)
+		{
+			head = malloc_node();
+			head = lexing(program[i], head);
+			curr = head;
+		}
+		else
+		{
+			curr->next = malloc_node();
+			curr = curr->next;
+			curr = lexing(program[i], curr);
+		}
 		i++;
 	}
 	// debug_write("\nCLOSING...", 2);
@@ -71,26 +94,14 @@ t_cmd	*create_linked_list(char *input)
 	return (head);
 }
 
-void	free_linked_list(t_cmd *head)
-{
-	t_cmd	*tmp;
-
-	while (head != NULL)
-	{
-		tmp = head;
-		if (head->args)
-			free_double_arr(head->args);
-		head = head->next;
-		free(tmp);
-	}
-}
 
 void	gate_function(char *input)
 {
 	if (check_quotation(input) != 1)
 		return ;
-	t_cmd *tmp = create_linked_list(input);
-	free_linked_list(tmp);
+	t_cmd *head = create_linked_list(input);
+	print_linked(head);
+	free_linked_list(head);
 	return ;
 }
 
@@ -99,12 +110,12 @@ void	gate_function(char *input)
 // delimeters -> '|', '>', '>>', '<', '<<'
 // echo hello world | wc -l > text.txt
 // "echo hello world wc -l > text.txt";
-int main(void)
+int main (void)
 {
 	char	*input;
 	// ft_debug();
 
-	printf("TO TEST -> echo -n hello there | cat -n | ls");
+	printf("\necho -n hello there | cat -n | ls\n");
 	input = readline("Minishelly$ ");
 	if (strlen(input) > 0)
 		add_history(input);

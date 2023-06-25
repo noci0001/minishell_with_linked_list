@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:55:47 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 16:43:28 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/24 23:13:19 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,24 @@ void	ft_debug(void)
 	create_header();
 
 	return ;
+}
+
+void	print_linked(t_cmd *head)
+{
+	int i;
+	t_cmd *temp;
+
+	temp = head;
+	while (temp)
+	{
+		printf("cmd: %s\n", temp->cmd);
+		printf("flag: %s\n", temp->flag);
+		i = 0;
+		while (temp->args && temp->args[i])
+		{
+			printf("args %s\n", temp->args[i]);
+			i++;
+		}
+		temp = temp->next;
+	}
 }
