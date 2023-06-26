@@ -6,13 +6,13 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/22 19:05:56 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/25 15:37:21 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int is_red(char *str)
+int which_redirection(char *str)
 {
 	if (*str == '<')
 		return (1);
@@ -25,75 +25,6 @@ int is_red(char *str)
 	if (str[0] == '>' && str[1] == '>')
 		return (4);
 	return (0);
-}
-
-int check_quotation(char *str)
-{
-	if (check_quantity_of_quotation(str) == 0)
-		return (0);
-	if (check_for_letters(str) == 0)
-		return (0);
-	return (1);
-}
-
-int check_for_letters(char *str)
-{
-	int found_status;
-
-	found_status = 0;
-	while (*str)
-	{
-		if (*str != '\'' || *str != '\"')
-			found_status = 1;
-		str++;
-	}
-	printf("%d\n", found_status);
-	return (found_status);
-}
-
-char *remove_quotes(char *str)
-{
-	int i;
-	int j;
-	char *ret_str = malloc(sizeof(char *) * 100);
-	if (!ret_str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		while (str[i] && (str[i] == '\"' || str[i] == '\''))
-			i++;
-		// if (str[i] && ((str[i] != '\'') || (str[i] != '\"')))
-		// 	ret_str[j++] = str[i++];
-		while (str[i] && ((str[i] != '\'') || (str[i] != '\"')))
-			ret_str[j++] = str[i++];
-		printf("->%c\n", str[i]);
-		if (str[i] && (str[i] == '\'' || str[i] == '\"'))
-			break;
-	}
-	ret_str[j] = '\0';
-	return (ret_str);
-}
-
-int check_quantity_of_quotation(char *str)
-{
-	int scount;
-	int dcount;
-
-	scount = 0;
-	dcount = 0;
-	while (*str)
-	{
-		if (*str == '\'')
-			scount++;
-		if (*str == '\"')
-			dcount++;
-		str++;
-	}
-	if ((scount % 2 != 0) || (dcount % 2 != 0))
-		return (0);
-	return (1);
 }
 
 int check_redirection_arg(char *word, int redirection)
@@ -109,41 +40,50 @@ int check_redirection_arg(char *word, int redirection)
 	return (0);
 }
 
-t_cmd *lexing(char *block, t_cmd *curr)
+t_cmd *lexing(char *segmented_input, t_cmd *curr)
 {
-	char **words = NULL;
-	int type_redirection;
-	int i;
-	int j;
+	char	**words_of_program;
+	int		type_redirection;
+	int		i;
+	int		j;
 
-	i = 1;
 	j = 0;
-	words = ft_split(block, ' ');
-	if (words[0])
-		curr->cmd = words[0];
-	if (words[1] && words[1][0] == '-' && words[1][1])
+	type_redirection = 0;
+	// debug_get_sectioned_input(segmented_input);
+	words_of_program = ft_split(segmented_input, ' ');
+	if (words_of_program[0])
 	{
-		curr->flag = words[1];
+		curr->cmd = ft_strdup(words_of_program[0]);
+		// debug_write("CMD intercepted:", 0);
+		// debug_write(curr->cmd, 1);
+	}
+	i = 1;
+	if (words_of_program[1] && words_of_program[1][0] == '-' && words_of_program[1][1])
+	{
+		curr->flag = ft_strdup(words_of_program[1]);
+		// debug_write("FLAG intercepted:", 0);
+		// debug_write(curr->flag, 0);
 		i = 2;
 	}
-	while (words[i])
+	j = 0;
+	if(words_of_program[i])
 	{
-		j = 0;
-
-		type_redirection = is_red(words[i]);
-		if (type_redirection != 0)
-		{
-			i++;
-			check_redirection_arg(words[i], type_redirection);
-		}
-		else
-		{
-			words[i] = remove_quotes(words[i]);
-			curr->args[j] = words[i];
-			printf("IS ARG ->%s\n", curr->args[j]);
-			j++;
-		}
-		i++;
+		curr->args = allocate_args(words_of_program, i);
+		while (words_of_program[i])
+			curr->args[j++] = remove_quotes(words_of_program[i++]);
+		curr->args[j] = 0;
 	}
+	free_double_arr(words_of_program);
 	return (curr);
+}
+
+char	**allocate_args(char** words_of_program, int i)
+{
+	int j;
+	char **args;
+	j = i;
+	while (words_of_program[i])
+		i++;
+	args = malloc(sizeof(char *) * (i - j + 1));
+	return (args);
 }

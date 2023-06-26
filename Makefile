@@ -6,7 +6,7 @@
 #    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/22 18:01:53 by snocita          ###   ########.fr        #
+#    Updated: 2023/06/24 16:08:53 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ RM		= rm -rf
 
 HEADER	= headers/minishell.h
 
-SRCS	= src/main.c src/lexing.c src/redirection.c
+SRCS	= src/main.c src/lexing.c src/redirection.c src/quotes_check.c \
+	src/debug.c
 
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)
@@ -35,6 +36,7 @@ $(NAME):	$(OBJ_DIR) $(OBJS) $(LIBFT)
 			cp $(LIBFT) .
 			@$(CC) $(CFLAGS) $(OBJS) libft.a -o $(NAME) -lreadline
 			mv src/*.o ./obj
+			touch src/debugging.txt
 
 $(OBJ_DIR):
 			mkdir $(OBJ_DIR)
@@ -51,5 +53,6 @@ fclean:	clean
 		@$(RM) $(NAME)
 		$(RM) libft.a get_next_line.a
 		make -C $(LIBFT_PATH) fclean
+		rm -rf src/debugging.txt
 
 re:		fclean all
