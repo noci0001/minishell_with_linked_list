@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/25 14:20:46 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:37:21 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ t_cmd *lexing(char *segmented_input, t_cmd *curr)
 		while (words_of_program[i])
 			curr->args[j++] = remove_quotes(words_of_program[i++]);
 		curr->args[j] = 0;
-		printf("\n j: %d\n", j);
-
 	}
 	free_double_arr(words_of_program);
 	return (curr);
@@ -87,6 +85,5 @@ char	**allocate_args(char** words_of_program, int i)
 	while (words_of_program[i])
 		i++;
 	args = malloc(sizeof(char *) * (i - j + 1));
-	printf("\n number: %d\n", (i - j + 1));
 	return (args);
 }

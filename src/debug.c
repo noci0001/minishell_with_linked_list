@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:55:47 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 23:13:19 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:36:41 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ void	print_linked(t_cmd *head)
 	while (temp)
 	{
 		printf("cmd: %s\n", temp->cmd);
-		printf("flag: %s\n", temp->flag);
+		if (temp->flag)
+			printf("flag: %s\n", temp->flag);
 		i = 0;
 		while (temp->args && temp->args[i])
 		{

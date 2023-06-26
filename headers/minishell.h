@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 22:55:50 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:08:27 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct s_cmd
 	char *flag;
 	char **args;
 	int fd;
+	char **evnp
 	struct s_cmd *next;
 };
 
@@ -78,31 +79,19 @@ typedef struct s_valid
 	char *tmp2;
 } t_valid;
 
-//
-char	**allocate_args(char** words_of_program, int i);
-void	print_linked(t_cmd *head);
-
-//
-t_cmd	*create_linked_list(char *input);
-t_cmd	*malloc_node(void);
-void	free_double_arr(char **str);
-t_cmd	*lexing(char *segmented_input, t_cmd *curr);
-int		check_quantity_of_quotation(char *str);
-int		check_quotation(char *str);
-int		check_redirection_arg(char *word, int redirection);
-int		is_red(char *str);
+void create_linked_list(char *input);
+t_cmd *malloc_node(void);
+void free_double_arr(char **str);
+t_cmd *lexing(char *block, t_cmd *curr);
+int check_quantity_of_quotation(char *str);
+int check_quotation(char *str);
+int check_redirection_arg(char *word, int redirection);
+int is_red(char *str);
 void redirection_in(char *str);
 void redirection_out(char *str);
 void here_doc(char *str);
 void double_redirection(char *str);
 int check_for_letters(char *str);
 char *remove_quotes(char *str);
-void	free_linked_list(t_cmd *head);
-
-void ft_debug(void);
-void debug_write(char *str, int id);
-char *debug_get_time(void);
-void debug_get_full_input(char *str);
-void debug_get_sectioned_input(char *str);
 
 #endif
