@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:55:47 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/25 15:36:41 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/26 16:41:54 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	debug_write(char *str, int id)
 	return ;
 }
 
-char *get_time(void)
+char	*get_time(void)
 {
 	time_t currentTime;
 	char *timeString;
@@ -67,7 +67,7 @@ char *get_time(void)
 	return (timeString);
 }
 
-void create_header()
+void	create_header()
 {
 	debug_write("\n\n", 0);
 	debug_write(get_time(), 1);
@@ -76,7 +76,7 @@ void create_header()
 	return ;
 }
 
-void debug_get_full_input(char *str)
+void	debug_get_full_input(char *str)
 {
 	debug_write("Intercepted input:", 1);
 	debug_write("\t\t", 0);
@@ -84,7 +84,7 @@ void debug_get_full_input(char *str)
 	debug_write("\n", 1);
 }
 
-void debug_get_sectioned_input(char *str)
+void	debug_get_sectioned_input(char *str)
 {
 	debug_write("Sectioned input:", 1);
 	debug_write("\t\t", 0);
@@ -100,7 +100,6 @@ void	ft_debug(void)
 		return ;
 	}
 	create_header();
-
 	return ;
 }
 
