@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/26 16:52:28 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/26 16:54:25 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	free_linked_list(t_cmd *head)
 }
 
 t_cmd	*malloc_node(void)
-t_cmd	*malloc_node(void)
 {
 	t_cmd	*head;
 	t_cmd	*head;
@@ -64,12 +63,12 @@ t_cmd	*malloc_node(void)
 	return (head);
 }
 
-void create_linked_list(char *input)
+void	create_linked_list(char *input)
+{
 	char	**program;
 	int		i;
 	t_cmd	*head;
 	t_cmd	*curr;
-	t_cmd *curr;
 
 	i = 0;
 	head = NULL;
@@ -97,11 +96,12 @@ void create_linked_list(char *input)
 }
 
 void	gate_function(char *input)
-void gate_function(char *input)
 {
+	t_cmd	*head;
+
 	if (check_quotation(input) != 1)
 		return ;
-	t_cmd *head = create_linked_list(input);
+	head = create_linked_list(input);
 	print_linked(head);
 	free_linked_list(head);
 	return ;
@@ -111,8 +111,8 @@ void gate_function(char *input)
 // accordingly so that each command points to its next
 // delimeters -> '|', '>', '>>', '<', '<<'
 // echo hello world | wc -l > text.txt
-int main (void)
 int main(void)
+{
 	char	*input;
 	// ft_debug();
 	char *input;

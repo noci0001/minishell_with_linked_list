@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/26 16:52:31 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/26 16:56:36 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ struct s_cmd
 	char *flag;
 	char **args;
 	int fd;
-	char **evnp
+	char **evnp;
 	struct s_cmd *next;
 };
 
@@ -77,10 +77,10 @@ typedef struct s_valid
 	char **splitted_env;
 	char *tmp1;
 	char *tmp2;
-} t_valid;
+}	t_valid;
 
-void create_linked_list(char *input);
-t_cmd *malloc_node(void);
+t_cmd	*create_linked_list(char *input);
+t_cmd	*malloc_node(void);
 void free_double_arr(char **str);
 t_cmd *lexing(char *block, t_cmd *curr);
 int check_quantity_of_quotation(char *str);
