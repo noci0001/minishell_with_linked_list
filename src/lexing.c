@@ -6,13 +6,13 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/25 15:37:21 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/26 18:20:15 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int which_redirection(char *str)
+int	which_redirection(char *str)
 {
 	if (*str == '<')
 		return (1);
@@ -27,7 +27,7 @@ int which_redirection(char *str)
 	return (0);
 }
 
-int check_redirection_arg(char *word, int redirection)
+int	check_redirection_arg(char *word, int redirection)
 {
 	if (redirection == 1)
 		redirection_in(word);
@@ -40,7 +40,7 @@ int check_redirection_arg(char *word, int redirection)
 	return (0);
 }
 
-t_cmd *lexing(char *segmented_input, t_cmd *curr)
+t_cmd	*lexing(char *segmented_input, t_cmd *curr)
 {
 	char	**words_of_program;
 	int		type_redirection;
@@ -66,7 +66,7 @@ t_cmd *lexing(char *segmented_input, t_cmd *curr)
 		i = 2;
 	}
 	j = 0;
-	if(words_of_program[i])
+	if (words_of_program[i])
 	{
 		curr->args = allocate_args(words_of_program, i);
 		while (words_of_program[i])
@@ -77,10 +77,11 @@ t_cmd *lexing(char *segmented_input, t_cmd *curr)
 	return (curr);
 }
 
-char	**allocate_args(char** words_of_program, int i)
+char	**allocate_args(char **words_of_program, int i)
 {
-	int j;
-	char **args;
+	int		j;
+	char	**args;
+
 	j = i;
 	while (words_of_program[i])
 		i++;
