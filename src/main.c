@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 15:06:50 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 16:16:48 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ t_cmd	*create_linked_list(char *input)
 		}
 		i++;
 	}
+	ft_cd(curr, g_my_envp);
 	// debug_write("\nCLOSING...", 2);
 	free_double_arr(program);
 	return (head);
@@ -100,8 +101,8 @@ void	gate_function(char *input)
 {
 	t_cmd	*head;
 
-	if (check_quotation(input) != 1)
-		return ;
+	// if (check_quotation(input) != 1)
+	// 	return ;
 	head = create_linked_list(input);
 	// print_linked(head);
 	free_linked_list(head);
@@ -115,7 +116,7 @@ void	gate_function(char *input)
 int	main(int ac, char **av, char **envp)
 {
 	char	*input;
-	// ft_debug();
+	ft_debug();
 	g_my_envp = obtain_envp(envp, ac, av);
 	printf("\necho -n hello there | cat -n | ls\n");
 	input = readline("Minishelly$ ");

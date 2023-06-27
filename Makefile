@@ -6,7 +6,8 @@ RM		= rm -rf
 HEADER	= headers/minishell.h
 
 SRCS	= src/main.c src/lexing.c src/redirection.c src/quotes_check.c \
-	src/debug.c src/builtins/ft_export.c src/builtins/ft_env.c src/builtins/ft_pwd.c
+	src/debug.c src/builtins/ft_export.c src/builtins/ft_env.c \
+	src/builtins/ft_cd.c src/builtins/ft_pwd.c
 
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)

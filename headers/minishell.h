@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/26 18:31:24 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 17:05:53 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,24 @@ int		check_for_letters(char *str);
 char	*remove_quotes(char *str);
 char	**allocate_args(char **words_of_program, int i);
 int		ft_env(char	**g_my_envp);
-int		ft_pwd(void);
+int		ft_pwd(char	**g_my_envp);
 
 int		ft_export(char *to_export);
 char	**obtain_double_array(char **double_array);
 char	**obtain_envp(char **envp, int ac, char **av);
 char	*check_string_to_export(char	*to_export);
+
+void	ft_debug(void);
+void	debug_write(char *str, int id);
+char	*get_time(void);
+void	create_header(void);
+void	debug_get_full_input(char *str);
+void	debug_get_sectioned_input(char *str);
+void	print_linked(t_cmd *head);
+
+//CD
+void		ft_cd(t_cmd	*input_struct, char **g_my_envp);
+int			check_nb_args(char **args);
+char		*ft_get_env(char	**envp, char	*value_to_fetch);
 
 #endif
