@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 16:16:48 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 19:45:24 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@ extern char	**g_my_envp;
 
 void	free_double_arr(char **str)
 {
-	int	i;
+	char	**temp;
 
-	i = 0;
 	if (!str)
 		return ;
-	while (str[i])
+	temp = str;
+	while (*str)
 	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
+		free(*str);
+		str++;
 	}
-	free(str);
-	str = NULL;
-	return ;
+	free(temp);
 }
 
 void	free_linked_list(t_cmd *head)
@@ -39,13 +36,13 @@ void	free_linked_list(t_cmd *head)
 	while (head != NULL)
 	{
 		tmp = head;
+		printf("!!hello\n");
 		if (head->args)
 			free_double_arr(head->args);
 		free(head->cmd);
 		free(head->flag);
 		head = head->next;
 		free(tmp);
-		tmp = NULL;
 	}
 }
 
@@ -73,7 +70,7 @@ t_cmd	*create_linked_list(char *input)
 
 	i = 0;
 	head = NULL;
-	// debug_get_full_input(input);
+	debug_get_full_input(input);
 	program = ft_split(input, '|');
 	while (program[i])
 	{
@@ -91,8 +88,6 @@ t_cmd	*create_linked_list(char *input)
 		}
 		i++;
 	}
-	ft_cd(curr, g_my_envp);
-	// debug_write("\nCLOSING...", 2);
 	free_double_arr(program);
 	return (head);
 }
@@ -101,10 +96,7 @@ void	gate_function(char *input)
 {
 	t_cmd	*head;
 
-	// if (check_quotation(input) != 1)
-	// 	return ;
 	head = create_linked_list(input);
-	// print_linked(head);
 	free_linked_list(head);
 	return ;
 }
@@ -123,7 +115,9 @@ int	main(int ac, char **av, char **envp)
 	if (strlen(input) > 0)
 		add_history(input);
 	gate_function(input);
+	// printf("%p\n", input);
 	free_double_arr(g_my_envp);
 	free(input);
+	sleep(15000);
 	return (0);
 }

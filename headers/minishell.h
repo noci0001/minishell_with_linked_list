@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 17:05:53 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 18:47:23 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,19 @@ t_cmd	*create_linked_list(char *input);
 t_cmd	*malloc_node(void);
 void	free_double_arr(char **str);
 t_cmd	*lexing(char *block, t_cmd *curr);
-int		check_quantity_of_quotation(char *str);
-int		check_quotation(char *str);
 int		check_redirection_arg(char *word, int redirection);
 int		is_red(char *str);
 void	redirection_in(char *str);
 void	redirection_out(char *str);
 void	here_doc(char *str);
 void	double_redirection(char *str);
-int		check_for_letters(char *str);
-char	*remove_quotes(char *str);
 char	**allocate_args(char **words_of_program, int i);
 int		ft_env(char	**g_my_envp);
 int		ft_pwd(char	**g_my_envp);
-
 int		ft_export(char *to_export);
 char	**obtain_double_array(char **double_array);
 char	**obtain_envp(char **envp, int ac, char **av);
 char	*check_string_to_export(char	*to_export);
-
 void	ft_debug(void);
 void	debug_write(char *str, int id);
 char	*get_time(void);
@@ -112,5 +106,9 @@ void	print_linked(t_cmd *head);
 void		ft_cd(t_cmd	*input_struct, char **g_my_envp);
 int			check_nb_args(char **args);
 char		*ft_get_env(char	**envp, char	*value_to_fetch);
+
+void	remove_quote(char **cmd);
+char	*delete_quote_tok(char *tok);
+char	*apply_delete(char *tok, int *i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:55:47 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 15:48:20 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 19:40:07 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <time.h>
 
 static int fd;
-#define HEADER "             ✨-----------🐚 🐚 🐚-------------------------✨\n             ✨ Start of MINISHELL      Debugging Session ✨\n             ✨---------- 🐚 🐚 🐚 ------------------------✨\n"
+#define HEADER "\t\t\t✨-----------🐚 🐚 🐚-------------------------✨\n\t\t\t✨ Start of MINISHELL\t  Debugging Session ✨\n\t\t\t✨---------- 🐚 🐚 🐚 ------------------------✨\n"
 
 void	debug_write(char *str, int id)
 {
@@ -69,7 +69,7 @@ char	*get_time(void)
 
 void	create_header()
 {
-	debug_write("\n\n", 0);
+	debug_write("\n\n\t", 0);
 	debug_write(get_time(), 1);
 	debug_write(HEADER, 1);
 	debug_write("\n\n", 0);

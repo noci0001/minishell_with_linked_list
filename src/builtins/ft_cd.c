@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:43:04 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 17:05:35 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 18:35:42 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_nb_args(char **args)
 {
 	if (args[0] == NULL)
 		return (0);
-	if (args[1])
+	if (args[1] != NULL)
 		return (0);
 	return (1);
 }
@@ -52,46 +52,47 @@ int	check_nb_args(char **args)
 
 void	update_envp(char **g_my_envp, char *new_pwd)
 {
-	int	i;
+	int		i;
+	char	*pwd_prefix;
+	char	*tmp;
+
 	i = 0;
 	while (ft_strncmp(g_my_envp[i], "PWD=", ft_strlen("PWD=")))
 		i++;
-	printf("PWD PATH IS AT POSITION -> %s\n", g_my_envp[i]);
 	free(g_my_envp[i]);
-	g_my_envp[i] = ft_strdup(new_pwd);
-	printf("%s\n", g_my_envp[i]);
+	pwd_prefix = ft_strdup("PWD=");
+	tmp = ft_strdup(new_pwd);
+	g_my_envp[i] = ft_strjoin(pwd_prefix, tmp);
+	free(tmp);
+	free(pwd_prefix);
 	return ;
 }
 
 void	ft_cd(t_cmd	*input_struct, char **g_my_envp)
 {
 	char	pwd[4097];
+	char	*cwd;
 	char	*beforesearch;
 	char	*oldpwd;
 	char	*pwdsearch;
 
 	(void)g_my_envp;
-	printf("%s\n", ft_get_env(g_my_envp, "PWD="));
 	if (check_nb_args(input_struct->args) == 0)
 	{
 		printf("Too many args\n");
 		return ;
 	}
-	printf("ONLY ONE ARG!\n");
-
 	beforesearch = ft_get_env(g_my_envp, "PWD=");
 	oldpwd = NULL;
 	if (beforesearch)
 		oldpwd = ft_strdup(beforesearch);
 	if (!chdir(input_struct->args[0]))
 	{
-		char *str = getcwd(pwd, 4096);
-		update_envp(g_my_envp, str);
+		cwd = getcwd(pwd, 4096);
+		update_envp(g_my_envp, cwd);
 		pwdsearch = ft_get_env(g_my_envp, "PWD=");
-		ft_pwd(g_my_envp);
 	}
 	free(oldpwd);
-	//printf("%s\n", ft_get_env(g_my_envp, "PWD="));
 	return ;
 }
 

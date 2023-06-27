@@ -6,76 +6,66 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:10:21 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/24 19:59:31 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 19:07:39 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	check_quotation(char *str)
+char	*apply_delete(char *tok, int *i)
 {
-	if (check_quantity_of_quotation(str) == 0)
-		return (0);
-	if (check_for_letters(str) == 0)
-		return (0);
-	return (1);
+	char	*tmp[2];
+	char	*new_tok;
+	char	quote;
+	int		j;
+
+	quote = tok[*i];
+	j = *i + 1;
+	while (tok[j] != quote)
+		j++;
+	tmp[0] = ft_substr(tok, 0, *i);
+	tmp[1] = ft_substr(tok, *i + 1, j - *i - 1);
+	new_tok = ft_strjoin(tmp[0], tmp[1]);
+	free (tmp[0]);
+	free (tmp[1]);
+	*i = j - 2;
+	tmp[0] = ft_strjoin(new_tok, tok + j + 1);
+	free (tok);
+	free (new_tok);
+	tok = ft_strdup(tmp[0]);
+	free (tmp[0]);
+	return (tok);
 }
 
-int	check_quantity_of_quotation(char *str)
-{
-	int	scount;
-	int	dcount;
-
-	scount = 0;
-	dcount = 0;
-	while (*str)
-	{
-		if (*str == '\'')
-			scount++;
-		if (*str == '\"')
-			dcount++;
-		str++;
-	}
-	if ((scount % 2 != 0) || (dcount % 2 != 0))
-		return (0);
-	return (1);
-}
-
-int	check_for_letters(char *str)
-{
-	int	found_status;
-
-	found_status = 0;
-	while (*str)
-	{
-		if (*str == '\'' || *str == '\"')
-		{
-			found_status = 1;
-			break ;
-		}
-		str++;
-	}
-	if (found_status == 1)
-		return (0);
-	return (1);
-}
-
-char	*remove_quotes(char *str)
+char	*delete_quote_tok(char *tok)
 {
 	int		i;
-	int		j;
-	char	*ret_str = malloc(sizeof(char) * 100);
+	char	*new_tok;
 
-	if (!ret_str)
-		return (NULL);
 	i = 0;
-	j = 0;
-	while (str[i])
+	while (tok[i])
 	{
-		while (str[i] && (str[i] == '\"' || str[i] == '\''))
-			i++;
-		ret_str[j++] = str[i++];
+		if (tok[i] == '\'' || tok[i] == '"')
+		{
+			new_tok = apply_delete(tok, &i);
+			free(tok);
+			tok = new_tok;
+		}
+		i++;
 	}
-	ret_str[j] = '\0';
-	return (ret_str);
+	return (tok);
+}
+
+void	remove_quote(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (((cmd[i] && ft_strchr(cmd[i], '\''))
+				|| (cmd[i] && ft_strchr(cmd[i], '"'))))
+			cmd[i] = delete_quote_tok(cmd[i]);
+		i++;
+	}
 }

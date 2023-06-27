@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:19 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 16:40:35 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 19:26:42 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,17 @@ t_cmd	*lexing(char *segmented_input, t_cmd *curr)
 	type_redirection = 0;
 	debug_get_sectioned_input(segmented_input);
 	words_of_program = ft_split(segmented_input, ' ');
+	//remove_quote(words_of_program);
 	if (words_of_program[0])
 	{
+		free(curr->cmd);
 		curr->cmd = ft_strdup(words_of_program[0]);
 		debug_write("CMD intercepted: ", 0);
 		debug_write(curr->cmd, 1);
 	}
 	i = 1;
-	if (words_of_program[1] && words_of_program[1][0] == '-' && words_of_program[1][1])
+	if (words_of_program[1] && words_of_program[1][0] == '-' \
+		&& words_of_program[1][1])
 	{
 		curr->flag = ft_strdup(words_of_program[1]);
 		debug_write("FLAG intercepted: ", 0);
@@ -73,7 +76,7 @@ t_cmd	*lexing(char *segmented_input, t_cmd *curr)
 		{
 			debug_write("ARG intercepted: ", 0);
 			debug_write(words_of_program[i], 1);
-			curr->args[j++] = remove_quotes(words_of_program[i++]);
+			curr->args[j++] = words_of_program[i++];
 		}
 		curr->args[j] = 0;
 	}
