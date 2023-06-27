@@ -1,0 +1,17 @@
+
+
+	Tue Jun 27 19:50:57 2023
+
+			✨-----------🐚 🐚 🐚-------------------------✨
+			✨ Start of MINISHELL	  Debugging Session ✨
+			✨---------- 🐚 🐚 🐚 ------------------------✨
+
+
+
+Intercepted input:
+		exit
+
+
+Sectioned input:
+		exit
+CMD intercepted: exit

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 19:45:24 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 19:50:45 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	gate_function(char *input)
 // echo hello world | wc -l > text.txt
 int	main(int ac, char **av, char **envp)
 {
+	if (ac != 1)
+		return (0);
 	char	*input;
 	ft_debug();
 	g_my_envp = obtain_envp(envp, ac, av);
@@ -118,6 +120,5 @@ int	main(int ac, char **av, char **envp)
 	// printf("%p\n", input);
 	free_double_arr(g_my_envp);
 	free(input);
-	sleep(15000);
 	return (0);
 }
