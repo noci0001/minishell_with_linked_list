@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/26 18:32:12 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 15:06:50 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,11 @@ int	main(int ac, char **av, char **envp)
 	char	*input;
 	// ft_debug();
 	g_my_envp = obtain_envp(envp, ac, av);
-	ft_env(g_my_envp);
 	printf("\necho -n hello there | cat -n | ls\n");
 	input = readline("Minishelly$ ");
 	if (strlen(input) > 0)
 		add_history(input);
 	gate_function(input);
-	ft_pwd();
 	free_double_arr(g_my_envp);
 	free(input);
 	return (0);

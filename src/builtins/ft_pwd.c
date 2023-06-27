@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:30:59 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/26 18:36:59 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/27 15:05:30 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@ char	*ft_get_env(char	**envp, char	*value_to_fetch)
 	int	i;
 
 	i = 0;
-
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], value_to_fetch) == 0)
-			return (value)
+		if (ft_strncmp(envp[i], value_to_fetch, \
+			ft_strlen(value_to_fetch)) == 0)
+			return (envp[i] + 5);
+		i++;
 	}
+	return (NULL);
 }
 
 int	ft_pwd(void)
 {
-	printf("%s\n", ft_get_env(g_my_envp, "PATH"));
+	char	*pwd;
+
+	pwd = ft_get_env(g_my_envp, "PWD=");
+	write(1, pwd, ft_strlen(pwd));
 	return (1);
 }
