@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 19:10:21 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 19:07:39 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/28 15:49:31 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,16 @@ char	*delete_quote_tok(char *tok)
 		if (tok[i] == '\'' || tok[i] == '"')
 		{
 			new_tok = apply_delete(tok, &i);
-			free(tok);
-			tok = new_tok;
 		}
 		i++;
 	}
-	return (tok);
+	return (new_tok);
 }
 
+//from "hello there" to "hello" "there"
 void	remove_quote(char **cmd)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (cmd[i])

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 18:47:23 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/28 13:05:05 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_env(char	**g_my_envp);
 int		ft_pwd(char	**g_my_envp);
 int		ft_export(char *to_export);
 char	**obtain_double_array(char **double_array);
-char	**obtain_envp(char **envp, int ac, char **av);
+char	**obtain_envp(char **envp);
 char	*check_string_to_export(char	*to_export);
 void	ft_debug(void);
 void	debug_write(char *str, int id);

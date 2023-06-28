@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:21:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 19:50:39 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/28 13:07:08 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ char	**obtain_double_array(char **double_array)
 	return (ret);
 }
 
-char	**obtain_envp(char **envp, int ac, char **av)
+char	**obtain_envp(char **envp)
 {
-	(void)ac;
-	(void)av;
 	g_my_envp = obtain_double_array(envp);
 	return (g_my_envp);
 }

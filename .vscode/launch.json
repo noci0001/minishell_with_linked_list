@@ -8,9 +8,9 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "/Users/snocita/Desktop/42_Projects/Core/MINI_WITH_LINK/minishell",
+			"program": "/Users/snocita/Desktop/42_Projects/Core/minishell42/minishell_with_linked_list/minishell",
 			"args": [],
-			"cwd": "/Users/snocita/Desktop/42_Projects/Core/MINI_WITH_LINK"
+			"cwd": "/Users/snocita/Desktop/42_Projects/Core/minishell42/minishell_with_linked_list"
 		}
 	]
 }

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:04:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/27 19:50:45 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/28 16:21:37 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,40 @@ void	free_double_arr(char **str)
 	temp = str;
 	while (*str)
 	{
-		free(*str);
+		if (*str && (*str != NULL))
+			free(*str);
 		str++;
 	}
-	free(temp);
+	if (temp != NULL)
+		free(temp);
+	return ;
 }
 
 void	free_linked_list(t_cmd *head)
 {
 	t_cmd	*tmp;
+	int		i;
 
+	i = 0;
 	while (head != NULL)
 	{
 		tmp = head;
-		printf("!!hello\n");
-		if (head->args)
-			free_double_arr(head->args);
-		free(head->cmd);
-		free(head->flag);
+		// if (head->args != NULL)
+		// 	free_double_arr(head->args);
+		while (head->args[i] && (head->args[i] != NULL))
+		{
+			if (head->args[i] && (head->args[i] != NULL))
+				free(head->args[i]);
+			i++;
+		}
+		free(head->args);
+		if (head->cmd != NULL)
+			free(head->cmd);
+		if (head->flag != NULL)
+			free(head->flag);
 		head = head->next;
-		free(tmp);
+		if (tmp != NULL)
+			free(tmp);
 	}
 }
 
@@ -60,6 +74,22 @@ t_cmd	*malloc_node(void)
 	head->next = NULL;
 	return (head);
 }
+
+// char	*convert_spaces_into_underscore(char *input)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (input[i] && input[i] != '\"')
+// 		i++;
+// 	while (input[i] && input[i] != '\"')
+// 	{
+// 		if (input[i] == ' ')
+// 			input[i] = '_';
+// 		i++;
+// 	}
+// 	return (input);
+// }
 
 t_cmd	*create_linked_list(char *input)
 {
@@ -107,17 +137,17 @@ void	gate_function(char *input)
 // echo hello world | wc -l > text.txt
 int	main(int ac, char **av, char **envp)
 {
+	char	*input;
+
 	if (ac != 1)
 		return (0);
-	char	*input;
 	ft_debug();
-	g_my_envp = obtain_envp(envp, ac, av);
+	g_my_envp = obtain_envp(envp);
 	printf("\necho -n hello there | cat -n | ls\n");
 	input = readline("Minishelly$ ");
 	if (strlen(input) > 0)
 		add_history(input);
 	gate_function(input);
-	// printf("%p\n", input);
 	free_double_arr(g_my_envp);
 	free(input);
 	return (0);

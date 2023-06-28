@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:49:58 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/25 14:08:48 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/28 13:04:37 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	**obtain_double_array(char **double_array)
 	if (!ret)
 		return (NULL);
 	ret[i] = NULL;
-
 	i = 0;
 	while (double_array[i])
 	{
